@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://ck2lhxv4hbk8u"]
+
+[ext_resource type="Script" uid="uid://b5jselualvf77" path="res://enemy.gd" id="1_7k104"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7k104"]
+albedo_color = Color(0.97, 0.09797002, 0.067899995, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4gyqm"]
+material = SubResource("StandardMaterial3D_7k104")
+size = Vector3(0.6, 0.6, 0.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qi2p4"]
+size = Vector3(0.4942627, 0.51171875, 0.49523926)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7k104"]
+
+[node name="enemy" type="CharacterBody3D" unique_id=1054685910]
+script = ExtResource("1_7k104")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1294253286]
+mesh = SubResource("BoxMesh_4gyqm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=770269688]
+shape = SubResource("BoxShape3D_qi2p4")
+
+[node name="AttackArea" type="Area3D" parent="." unique_id=1611690440]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea" unique_id=890566922]
+shape = SubResource("BoxShape3D_7k104")
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
