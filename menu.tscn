@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://dsfscoywoodo6"]
+
+[ext_resource type="Script" uid="uid://ba0r04vmuq7c5" path="res://menu.gd" id="1_lti8b"]
+
+[node name="menu" type="Control" unique_id=1508519520]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lti8b")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=521801707]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.008
+offset_right = 3.0
+offset_bottom = -8.184021
+color = Color(0.21564534, 0.34801415, 0.40182343, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=638695994]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.39600003
+anchor_top = 0.448
+anchor_right = 0.64100003
+anchor_bottom = 0.77300006
+offset_left = -0.1920166
+offset_top = -0.3040161
+offset_right = 0.56799316
+offset_bottom = 0.095947266
+theme_override_constants/separation = 20
+
+[node name="play" type="Button" parent="VBoxContainer" unique_id=900358621]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "contininue"
+
+[node name="settings" type="Button" parent="VBoxContainer" unique_id=1980018912]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "settinngs"
+
+[node name="exit" type="Button" parent="VBoxContainer" unique_id=894628034]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "exit"
+
+[node name="Label" type="Label" parent="." unique_id=197060014]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.30800003
+anchor_top = 0.26700002
+anchor_right = 0.73700005
+anchor_bottom = 0.41500002
+offset_left = 0.18395996
+offset_top = -0.01600647
+offset_right = -0.024047852
+offset_bottom = 0.07998657
+theme_override_font_sizes/font_size = 70
+text = "OVERFLOW"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="VBoxContainer/play" to="." method="_on_contininue_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/settings" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/exit" to="." method="_on_exit_button_pressed"]

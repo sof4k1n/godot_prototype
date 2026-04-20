@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://debprahfmmn1a"]
 
 [ext_resource type="Script" uid="uid://bib46l8xiuqdd" path="res://player.gd" id="1_f3sb7"]
+[ext_resource type="PackedScene" uid="uid://dsfscoywoodo6" path="res://menu.tscn" id="1_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://ck2lhxv4hbk8u" path="res://enemy.tscn" id="2_fj7yv"]
+[ext_resource type="Texture2D" uid="uid://diw1k7msrxsg7" path="res://ground.png" id="4_aqk2v"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_fj7yv"]
 
@@ -12,35 +14,28 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f3sb7"]
 bg_color = Color(0.9706122, 0, 0.0161106, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aqk2v"]
+emission_enabled = true
+emission = Color(0.09799255, 0.23075727, 0.12985796, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_036b0"]
+material = SubResource("StandardMaterial3D_aqk2v")
+top_radius = 0.02
+bottom_radius = 0.02
+height = 1.0
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_aqk2v"]
-size = Vector3(500, 7.529236, 500)
+size = Vector3(250, 7.709839, 250)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_f3sb7"]
-noise_type = 2
-seed = -1
-frequency = 0.0001
-cellular_distance_function = 2
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fj7yv"]
-noise = SubResource("FastNoiseLite_f3sb7")
-seamless = true
-seamless_blend_skirt = 1.0
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_f3sb7"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tlwt5"]
-albedo_texture = SubResource("NoiseTexture2D_fj7yv")
-metallic = 0.21
-roughness = 0.54
-normal_enabled = true
-normal_scale = 1.14
-normal_texture = SubResource("NoiseTexture2D_f3sb7")
-uv1_scale = Vector3(3000, 3000, 3000)
-texture_filter = 0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_036b0"]
+albedo_color = Color(1, 1, 1, 0)
+albedo_texture = ExtResource("4_aqk2v")
+uv1_scale = Vector3(3, 3, 3)
+uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_036b0"]
-material = SubResource("StandardMaterial3D_tlwt5")
-size = Vector3(500, 1, 500)
+material = SubResource("StandardMaterial3D_036b0")
+size = Vector3(250, 1, 250)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
 
@@ -52,8 +47,8 @@ background_mode = 2
 sky = SubResource("Sky_fj7yv")
 ambient_light_source = 3
 fog_enabled = true
-fog_light_color = Color(0.3868927, 0.5817664, 0.66800815, 1)
-fog_density = 0.0
+fog_light_color = Color(0.20659742, 0.35418794, 0.3479079, 1)
+fog_density = 0.0041
 fog_aerial_perspective = 0.48
 fog_sky_affect = 0.733
 
@@ -70,6 +65,9 @@ height = 10.14
 height = 10.14
 
 [node name="world" type="Node3D" unique_id=1677701049]
+
+[node name="menu" parent="." unique_id=1508519520 instance=ExtResource("1_tlwt5")]
+process_mode = 3
 
 [node name="enemy" parent="." unique_id=1054685910 instance=ExtResource("2_fj7yv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.2060814, 1.3276426, 2.6709652)
@@ -94,6 +92,9 @@ fov = 32.910755
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14441895, 0.043852925, 0)
 shape = SubResource("CapsuleShape3D_aqk2v")
 
+[node name="RayCast3D" type="RayCast3D" parent="player/Camera3D" unique_id=483525364]
+target_position = Vector3(0, -1, -40)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="player" unique_id=401974167]
 
 [node name="ProgressBar" type="ProgressBar" parent="player/CanvasLayer" unique_id=796522091]
@@ -111,10 +112,13 @@ value = 100.0
 show_percentage = false
 metadata/_edit_use_anchors_ = true
 
+[node name="HookLine" type="MeshInstance3D" parent="player" unique_id=167999216]
+mesh = SubResource("CylinderMesh_036b0")
+
 [node name="floor" type="StaticBody3D" parent="." unique_id=134782968]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="floor" unique_id=1146565172]
-transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, -3.2278748, 0)
+transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, -3.3729553, 0)
 shape = SubResource("BoxShape3D_aqk2v")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="floor" unique_id=1310184686]
@@ -125,7 +129,9 @@ mesh = SubResource("BoxMesh_036b0")
 environment = SubResource("Environment_tlwt5")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=197001623]
-transform = Transform3D(0.9975176, 0, -0.07041807, 0, 1, 0, 0.07041807, 0, 0.9975176, 0, 0, 0)
+transform = Transform3D(0.9883748, 0, 0.15203714, 0, 1, 0, -0.15203714, 0, 0.9883748, -0.81535494, -0.07226181, -0.83122504)
+light_color = Color(0.8831805, 0.93499494, 0.9766788, 1)
+light_energy = 0.683
 shadow_enabled = true
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=1782647572]
