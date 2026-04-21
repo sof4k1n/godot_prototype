@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dtd6yb1i0o28s"]
+
+[ext_resource type="Texture2D" uid="uid://cqjtsc173p15u" path="res://Texturelabs_Brick_120S.jpg" id="1_2yue8"]
+
+[resource]
+albedo_texture = ExtResource("1_2yue8")
+albedo_texture_force_srgb = true
+uv1_scale = Vector3(0.2, 0.2, 0.2)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 0.8705463
+uv1_world_triplanar = true
